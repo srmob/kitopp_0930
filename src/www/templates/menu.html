@@ -1,0 +1,84 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+       <ion-nav-back-button>
+      </ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>    
+         <!--<ion-nav-buttons side="right">
+            <img data-ng-src="img/Kitaki_small.jpg">
+      </ion-nav-buttons>-->
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left" width="200" >
+    <ion-header-bar class="bar-dark">
+      <h1 class="title"><img data-ng-src="img/Kitaki_Logo.gif" width="100%" height="100%"></h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list> <!--{{userRoleId}}-->
+          <!--Menu by krishna sep-12-->
+          <div ng-show="userRoleId == 3 ">
+             <ion-item menu-close class="item-divider item-stable  item-avatar item-top">
+               <!--<img src="../img/venkman.jpg">--><label class="subdued"><b>Seller Menu</b></label>
+            </ion-item>
+            <ion-item menu-close class="item-light item-avatar item-top" href="#/app/sellerOrderSummary/myshop" >
+                <img src="{{myShopImgUrl}}" err-SRC="img/default.jpg"><label class="subdued"><i class="icon ion-android-favorite-assertive"></i>&nbsp;&nbsp;My Shop</label>
+            </ion-item>
+            <ion-item menu-close class="item-light" href="#/app/sellerOrderSummary" ng-style="{'line-height': 9 + 'px'}" ng-click="viewSellerOrders(userId)">
+                <i class="icon ion-clipboard"></i><label class="subdued">&nbsp;Manage Orders<label class="subdued positive">({{newOrdersCount}})</label> </label> <!--href="#/app/sellerOrderSummary"-->
+           </ion-item>
+            <!--<ion-item menu-close class="item-light" href="#/app/sellerOrderSummary/productManage">
+              Manage Products
+           </ion-item>-->
+             
+            <ion-item menu-close class="item-light " href="#/app/sellerOrderSummary/productManage1">
+              <i class="icon ion-android-clipboard"></i><label class="subdued">&nbsp;&nbsp;Manage Products</label>
+           </ion-item>
+               <!-- disabled button by krishna sep-24-->
+          <!--  <ion-item menu-close class="item-light" href="#/app/sellerOrderSummary/customerMgmt" >-->
+          <!-- removed link by krishna sep-24-->
+              <ion-item class="item-light" >
+              <i class="icon ion-android-contacts custom-icon" ng-disabled="true"></i><label class="subdued custom-icon" ng-disabled="true">&nbsp;Manage Customers </label>
+           </ion-item>
+               <!-- disabled button by krishna sep-24-->
+            <ion-item class="item-light" >
+                <i class="icon ion-pull-request custom-icon" ng-disabled="true"></i><label class="subdued custom-icon" ng-disabled="true">&nbsp;&nbsp;Manage RFQ</label>
+            </ion-item>
+            
+        </div>
+        <div ng-show="userRoleId == 2 || userRoleId == 3 ">
+            <ion-item menu-close class="item-divider item-stable item-avatar item-top" ng-style="{'line-height': 15 + 'px'}">
+                <!--<img src="../img/venkman.jpg">--><label class="subdued"><b>Buyer Menu</b></label>
+            </ion-item>
+             <ion-item menu-close class="my-item item-light"  ng-style="{'line-height': 9 + 'px'}" ng-click="getSellersForBuyer()" href="#/app/showShops"  >
+                 <i class="icon ion-bag"></i><label class="subdued">&nbsp;&nbsp;My Shops</label> <!--ng-click="getSellersForBuyer()"-->
+           </ion-item>
+            <ion-item menu-close class="item-light"  href="#/app/buyerOrders" ng-style="{'line-height': 9 + 'px'}" ng-click="buyerOrders(userId)">
+                <i class="icon ion-clipboard"></i><label class="subdued">&nbsp;&nbsp;My Orders</label> <!--ng-click="buyerOrders(101)" -->
+           </ion-item>
+             <!-- disabled button by krishna sep-24-->
+            <ion-item class="item-light " >
+                <i class="icon ion-android-favorite-outline  custom-icon" ng-disabled="true"></i><label class="subdued  custom-icon" ng-disabled="true">&nbsp;&nbsp;My Favorite Shops</label>
+           </ion-item>
+             <!-- disabled button by krishna sep-24-->
+            <ion-item class="item-light" >
+                <i class="icon ion-clipboard custom-icon" ng-disabled="true"></i><label class="subdued custom-icon" ng-disabled="true">&nbsp;&nbsp;Business Requests</label>
+           </ion-item>
+        </div>
+          <ion-item menu-close class="item-light"  ng-style="{'line-height': 9 + 'px'}" href="#/app/about" ng-click="viewSellerOrders(userId)"><i class="icon ion-ios-information-outline"></i><label>&nbsp;&nbsp;About Us</label>
+        </ion-item>
+          
+          <ion-item menu-close class="item-light" ng-style="{'line-height': 9 + 'px'}" href="#/app/faq"  ng-click="viewSellerOrders(userId)"><i class="icon ion-ios-help-outline"></i><label>&nbsp;&nbsp;FAQs</label>
+        </ion-item>
+        <ion-item menu-close class="item-light" ng-style="{'line-height': 2 + 'px'}" ng-click="logout()">
+            <i class="icon ion-log-out"></i><label>&nbsp;&nbsp;Log Out</label>
+        </ion-item>
+           
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

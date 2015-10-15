@@ -1,0 +1,147 @@
+<ion-view view-title="Manage Products" align-title="center" cache-view="false">
+    <ion-nav-buttons side="right">
+         <!--add label color changed by krishna sep30-->
+      <button class="button icon ion-ios-plus-empty button-clear " ng-click="addGeneric()" ng-show="productFlag!='add'">Add</button>
+      <!--<button class="button icon ion-edit button-clear button-assertive" ng-click="edit()">Edit</button>-->
+    </ion-nav-buttons>
+<!--    <div class="bar bar-subheader row" ng-show="productFlag !=='add'">
+        
+            <div class="col col-30">
+                <select ng-model="selectedDept" 
+                    ng-options="dept.product_catg_name for dept in productCatg | unique:'product_catg_name' | orderBy:'product_catg_name'"
+                    class="item item-select item-positive">
+                    <option value="" disabled default selected>products category</option>
+                </select>
+            </div>
+            <div class="col col-30" ng-hide="selectedDept.product_catg_name == null ">
+                <select ng-model="subCatg" 
+                    ng-options="dept as dept.product_sub_catg_name for dept in productCatg | unique:'product_sub_catg_name' | orderBy:'product_sub_catg_name' | filter:selectedDept.product_catg_name"
+                    class="item item-select item-positive" ng-click="getProductsForID(selectedDept)">
+                    <option value="" disabled default selected>product sub category</option>
+                </select>
+            </div>
+    </div>-->
+    <!--<div class="bar bar-subheader row bar-light" ng-show="productFlag !=='add'">
+        <div class="col col-30">
+              <select ng-model="selectedDept" 
+                      ng-options="dept.product_catg_name for dept in productCatg | unique:'product_catg_name' | orderBy:'product_catg_name'"
+                      class="item item-input item-select item-positive">
+                      <option value="" disabled default selected>products category</option>
+              </select>
+        </div>
+        <div class="col col-30" ng-hide="selectedDept.product_catg_name == null ">
+              <select ng-model="subCatg" 
+                      ng-options="dept as dept.product_sub_catg_name for dept in productCatg | unique:'product_sub_catg_name' | orderBy:'product_sub_catg_name' | filter:selectedDept.product_catg_name"
+                      class="item item-input item-select item-positive" ng-click="getProductsForID(selectedDept)"
+                      >
+                      <option value="" disabled default selected>product sub category</option>
+              </select>
+        </div>
+        <div class="spacer" style="width: 10px;"></div>
+    </div>-->
+     <!--<div class="bar bar-subheader row bar-royal" ng-show="productFlag =='add'">
+             Add Product
+    </div>-->
+    <ion-header-bar class="bar-light bar-subheader" ng-show="productFlag !=='add'">
+        <input type="search"
+          placeholder="Search a product..."
+          ng-model="searchProduct"
+          ng-focus="searchFocused = true"
+          ng-blur="searchFocused = false"
+          ng-change="scrollTop()">
+        <button ng-if="searchProduct.length"
+          class="button button-icon ion-android-close input-button"
+          ng-click="clearSearch()">
+        </button>
+  </ion-header-bar>
+   <!--<div class="bar bar-subheader bar-positive" align-title="center" ng-show="productFlag =='add'">
+                <h4 class="title">Add a product</h4>
+  </div>-->
+    <form name="ProductMgmtForm"  enctype='multipart/form-data' class="simple-form">
+        <ion-content class="has header has-subheader">
+        <!--cc = {{cameraButtonClicked}}
+        uri--->
+         <!-- <div class="spacer" style="height: 20px;"></div>-->
+           <!-- PF={{productFlag}} - {{$index % 2 === 0}}-->
+            <!--<div class="bar bar-header item-input-inset" ng-show="productFlag==0">
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios-search placeholder-icon"></i>
+                    <input type="search" placeholder="Search product" ng-model="searchProduct" >
+                </label>
+                <button class="button button-clear button-calm" ng-click="clearSearch()">
+                    Cancel
+                </button>
+            </div>
+          sp={{searchProduct}}-->
+           <div ng-show="productFlag==0">
+                <ion-item class="row list" ng-repeat="row in products2 =(products | filter:searchProduct)  | orderBy: '-product_id'" ng-if="$index % 2 === 0">
+                <div class="col col-50" ng-if="$index < products2.length" ng-click="selectProductEdit({{products2[$index].product_id}})" >
+                    <div class="row item">
+                        <div class="col wrapper" style="height:160px"> 
+                            <img class="thumbnail" data-ng-src="{{productImageUrl}}{{products2[$index].product_id}}/index/0/ " err-SRC="img/default.jpg" width="100%"> 
+                        </div>
+                         <div class="description">
+                           <p class="description_content">
+                             <b>  {{products2[$index].product_name|uppercase}}
+                               </b>
+                               <!--[{{products2[$index].product_id}}]-->
+                           </p>
+                        </div>
+                    </div> 
+                </div>
+                    <!-- default image on right by krishna sep-24-->
+                <div class="col col-50"  ng-if="$index+1 < products2.length" ng-click="selectProductEdit({{products[$index+1].product_id}})">
+                    <div class="row item">
+                        <div class="col wrapper" style="height:160px"> 
+                            <img class="thumbnail" data-ng-src="{{productImageUrl}}{{products2[$index+1].product_id}}/index/0/"err-SRC="img/default.jpg" width="100%"> 
+                        </div>
+                         <div class="description">
+                           <p class="description_content">
+                              <b> {{products2[$index+1].product_name|uppercase}}
+                               </b>
+                               <!--[{{products2[$index+1].product_id}}]-->
+                           </p>
+                            <!--<label class="subdued dark">
+                                    {{products2[$index].product_name}} 
+                                <p>
+                                    <label class="item-note dark">[{{products2[$index].product_id}}]</label>
+                                </p>
+                            </label>-->
+
+                        </div>
+                    </div>
+                </div>
+                
+            </ion-item>
+           
+           <!--<div class="list card" ng-repeat="row in products2 =(products | filter:searchProduct)  | orderBy: '-product_id'">
+               <div class="item item-body wrapper">
+                <img class="full-image" width="100%" data-ng-src="{{productImageUrl}}{{products2[$index].product_id}}/index/0/400x400px " err-SRC="../img/default.jpg">
+               </div>
+           </div>-->
+           </div>
+            <!--<ion-slide-box active-slide="myActiveSlide">
+  <ion-slide>
+    <div class="box blue"><h1>BLUE</h1></div>
+  </ion-slide>
+  <ion-slide>
+    <div class="box yellow"><h1>YELLOW</h1></div>
+  </ion-slide>
+  <ion-slide>
+    <div class="box pink"><h1>PINK</h1></div>
+  </ion-slide>
+</ion-slide-box>
+            -->
+        </ion-content>
+       
+    </form>
+        <!--<ion-footer-bar align-title="left" class="bar-stable" ng-show="productFlag=='add'">
+            <div class="buttons" ng-click="resetProduct()">
+                <button class="button button-stable">Cancel</button>
+            </div>
+            <h1 class="title"></h1>
+            <div class="buttons" ng-click="addProduct(product)">
+                <button class="button button-balanced" type="submit" ng-disabled="ProductMgmtForm.$invalid">Save</button>
+            </div>
+        </ion-footer-bar>-->
+</ion-view>

@@ -1,0 +1,115 @@
+<ion-view view-title=" Edit Product Details" cache-view="false" class="subdued assertive"> 
+    
+    <form name="ProductMgmtEdit"  novalidate class="simple-form">
+        <ion-content>
+            <!--{{product}} - {{userId}}-->
+           <!-- {{productCatg}} - {{userId}}-->
+            <div class="list"> <!--IMG  is {{imgURI}}--> <!--cc={{cameraButtonClicked}}-->
+             <div class="item item-input">
+                <!--<div class="input-label">Product Image</div>-->
+                <!--<img ng-show="imgURI !== undefined" ng-src="{{productImageUrl}}{{product.product_id}}/index/0">
+                <img ng-src="{{imageURI}}" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">
+                <img ng-show="imgURI === null" ng-src="http://placehold.it/70x50">
+                <img ng-show="imgURI !== null" ng-src="{{imgURI}}">-->
+                
+                <!--<img ng-show="!cameraButtonClicked" ng-src="{{productImageUrl}}{{product.product_id}}/index/0" err-SRC="img/default.jpg">
+                <img ng-show="cameraButtonClicked" ng-src="data:image/jpeg;base64,{{imgURI}}" err-SRC="img/default.jpg">
+                 
+                <button class="button button-small button-outline  button-assertive"ng-click="addImage(0)">
+                        <i class="icon ion-ios-camera-outline"></i>
+                </button>
+                <div class="spacer" style="width:20px"></div>
+                
+                <button class="button button-small   button-calm" ng-click="addImage(1)" >
+                        <i class="icon ion-image" ></i>
+                </button>-->
+                
+                <div class="subduded input-label">Product image:<div class="spacer" style="width:10px"></div></div>
+                    <img ng-show="!cameraButtonClicked" ng-src="{{productImageUrl}}{{product.product_id}}/index/0" err-SRC="img/default.jpg" ng-model="product.product_img_id1" class="img-thumbnail" style="height:150px;width:250px;" >
+                    <img ng-src="data:image/jpeg;base64,{{imgURI}}" ng-model="product.product_img_id1" id="smallimage" class="img-thumbnail" style="height:150px;width:200px;" ng-show="cameraButtonClicked">
+                    <span class="spacer" style="width:20px"></span>
+                    <button class="button icon ion-ios-camera-outline " style="height:20px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"  ng-click="addImage(0)">
+                        
+                    </button><div class="spacer" style="width:5px"></div>
+                    <button class="button icon ion-image " ng-click="addImage(1)" style="height:20px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                    </button>
+              </div>
+              </div>
+              
+              <label id = "" class="item item-input">
+                    <span class="input-label">Product Id</span>
+                    <span class="label col-75">{{product.product_id}}</span>
+              </label>
+              <label id = "" class="item item-input" ng-class="{ 'has-error-lr' : ProductMgmtEdit.product_name.$invalid, 'valid' : ProductMgmtEdit.product_name.$valid}">
+                <span class="input-label">Product Name</span>
+                <input type="text" placeholder="Name" ng-model="product.product_name" value="product.product_name" name="ProductMgmtEdit.product_name" required>
+              </label>
+              <label id = ""class="item item-input" ng-class="{ 'has-error-lr' : ProductMgmtEdit.product_desc.$invalid, 'valid' : ProductMgmtEdit.product_desc.$valid}">
+                <span class="input-label">Description</span>
+                <!--<input type="text" placeholder="Description.." ng-model="product.product_desc" value="product.product_desc">-->
+                <textarea type="text" rows="4" cols="10" placeholder="Description.." name="ProductMgmtEdit.product_desc" ng-model="product.product_desc" value="product.product_desc" min="1" maxlength="200" required></textarea>
+              </label><!--{{product.product_catg_id}}-{{product.product_sub_catg_id}}-->
+              <label id = "" class="item item-input">
+                    <span class="input-label">Category</span>
+                <!--<input type="text" placeholder="category" ng-model="product.product_catg" >-->
+                    <select ng-options="dept.product_catg_id as dept.product_catg_name for dept in productCatg | unique:'product_catg_id' | orderBy:'product_catg_name'" ng-model="product.product_catg_id"
+                          class="item item-input item-select item-royal col-50">
+                          <!--<option ng-value="{{dept.product_catg_id}}" default selected>{{product.product_catg_name}}</option>-->
+                  </select>
+                  <!--<select  ng-options="dept.product_catg_name as dept.product_catg_name for dept in productCatg | unique:'product_catg_name' | orderBy:'product_catg_name'" ng-model="product.product_catg_name"></select>-->
+      
+              </label>
+              <label id = "" class="item item-input">
+                <span class="input-label">Sub category</span>
+                <!--<input type="text" placeholder="subcategory" ng-model="product.subcatg">-->
+               <!-- <label class="select select-assertive">-->
+                  <select ng-model="product.product_sub_catg_id" 
+                          ng-options="dept.product_sub_catg_id as dept.product_sub_catg_name for dept in productCatg| orderBy:'product_sub_catg_name' | filter:product.product_catg_id"
+                           class="item item-input item-select item-royal col-50">
+                          <!--<option value="" disabled default selected>{{product.product_sub_catg_name}}</option>-->
+                  </select>
+               <!-- </label>-->
+              </label>
+              <label id = "" class="item item-input" ng-class="{ 'has-error-lr' : ProductMgmtEdit.product_mfr_name.$invalid, 'valid' : ProductMgmtEdit.product_mfr_name.$valid}">
+                <span class="input-label">Manufacturer Name</span>
+                <input type="text" placeholder="Manufacturer Name" ng-model="product.product_mfc_name" name="ProductMgmtEdit.product_mfr_name" required>
+              </label>
+              <label id = "" class="item item-input" ng-class="{ 'has-error-lr' :  ProductMgmtEdit.lot_size.$invalid, 'valid' : ProductMgmtEdit.lot_size.$valid}">
+                <span class="input-label">Lot Size</span>
+                <input type="number" placeholder="Lot Size" ng-model="product.product_min_qty" name="ProductMgmtEdit.lot_size" min="1" maxlength="10" ng-pattern="onlyNumbers" required>
+               <!-- <input ng-pattern="/^$|^[0-9,]+$/" placeholder="Lot Size"  ng-model="value" money required/>-->
+              </label>
+              <!--<label id = "" class="item item-input">
+                <span class="input-label">Min Qty</span>
+                <input type="number" placeholder="Min Qty" ng-model="product.product_min_qty">
+              </label>-->
+             <!-- <label id = "" class="item item-input text">
+                <span class="input-label">Product Content</span>
+                <textarea placeholder="product content" rows="1" ng-model="product.content" ng-Required="true" name="content">
+                </textarea>
+              </label>-->
+                
+               <label id = "" class="item item-input item-stacked-label">
+                <span class="input-label col col-30">Product Price</span>
+                   <div ng-repeat="prices in product.price" ng-form='ProductEditPriceForm' name="ProductEditPriceForm">
+                      <label class="item item-input" style="border:1px" ng-class="{ 'has-error-lr' :  ProductEditPriceForm.product_price.$invalid, 'valid' : ProductEditPriceForm.product_price.$valid}">
+                       <span class="input-label">{{prices.category_name}}</span>
+                       <input type="number" ng-model="prices.product_price"  value='{{prices[$index].product_price | currency:"&#8377;" : 2 }}' min="0"  ng-pattern="decimalNumbers" placeholder="enter price" step="0.01" maxlength=10 name="product_price" required>
+                       
+                        </label>
+                   </div>
+                </label>
+            </div><!--{{product.product_catg_name}}-{{product.product_sub_catg_name}}
+            {{product}}-->
+        </ion-content>
+    </form>
+    <ion-footer-bar align-title="left" class="bar-stable">
+        <div class="buttons" ng-click="resetProduct()">
+            <button class="button button-stable">Cancel</button>
+        </div>
+        <h1 class="title"></h1>
+        <div class="buttons" ng-click="editProduct(product)">
+            <button class="button button-balanced" type="submit" ng-disabled="ProductMgmtEdit.$invalid">Save</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

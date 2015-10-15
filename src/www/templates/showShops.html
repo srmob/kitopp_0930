@@ -1,0 +1,31 @@
+<ion-view view-title="Select a shop to order" hide-back-button="true" cache-view="false">
+    <ion-nav-view name="menuContent"></ion-nav-view>
+    
+    <ion-content >
+     <!--<div class="spacer" style="height: 10px;"></div>-->
+      <ion-item class="row row-top" ng-repeat="row in sellersAssociated"  ng-if="$index % 2 === 0" >
+        <div class="col col-50 col-center item item-image" ng-if="$index < sellersAssociated.length"  >
+           <!-- <label class="item item-clear" ng-style="{'line-height': 3 + 'px'}">-->
+                 <label class="subdued positive" ng-click="addFavSeller(sellersAssociated[$index].uid,sellersAssociated[$index].buyer_uid)">
+                       <label class="subdued">{{sellersAssociated[$index].shop_name}}</label>
+                    <!--<button class="button button-clear icon ion-heart button-clear" ng-click="addFavSeller(sellersAssociated[$index].uid,sellersAssociated[$index].buyer_uid)">
+                    </button>-->
+                </label><!--</span>-->
+            <!--</label>-->
+            <div class="row" ng-click="pickProducts(sellersAssociated[$index].shop_name,sellersAssociated[$index].uid,sellersAssociated[$index].buyer_uid)">
+                <img data-ng-src="{{ sellersAssociated[$index].imgpath}}" err-SRC="img/default.jpg">
+            </div>
+        </div>
+        <div class="col col-50 col-center item item-image" ng-if="$index+1 < sellersAssociated.length" >
+                <label class="subdued positive" ng-click="addFavSeller(sellersAssociated[$index].uid,sellersAssociated[$index].buyer_uid)"> 
+                    <label class="subdued">{{sellersAssociated[$index+1].shop_name}}</label>
+                    <!--<button class="button button-clear icon ion-heart button-clear"  ng-click="addFavSeller(sellersAssociated[$index+1].uid,sellersAssociated[$index+1].buyer_uid)">
+                    </button>-->
+                </label>
+            
+            <div class="row" ng-click="pickProducts(sellersAssociated[$index+1].shop_name,sellersAssociated[$index+1].uid,sellersAssociated[$index+1].buyer_uid)"><img data-ng-src="{{ sellersAssociated[$index+1].imgpath}}" err-SRC="img/default.jpg"> </div>
+        </div>
+      </ion-item>
+      </ion-content>
+
+</ion-view>

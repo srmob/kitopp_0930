@@ -1,0 +1,77 @@
+<ion-view view-title=" Orders Summary" cache-view="false" hide-back-button="true">
+     <!--<ion-nav-view name="menuContent"></ion-nav-view>-->
+    <div class="bar bar-subheader bar-royal row row-center">
+        <div class="col col-25 item-text-wrap ">Order No</div>
+        <div class="col c0l-50 col-offset-10 item-text-wrap ">Date</div>
+        <div class="col col-25 col-right">Estimate</div>
+    </div>
+       <ion-content padding="true"  class="has-header" class="padding scroll-bg"> 
+         
+         
+        <div class="spacer" style="height: 40px;"></div>
+        <div class="bar bar-royal" ng-show="sellerOrders.length == 0">
+            <label class="subdued"> No orders placed </label>
+        </div>
+         <div class="list">
+          <!--<a  ng-repeat="item in sellerOrders" class="bgColor item row " ng-click="viewOrderDetails()" >ng-href="#/app/seller/sellerOrderDetails"
+             <div class="col col-20 item-text-wrap">{{item.order_id}}</div>
+             <div class="col c0l-60 item-text-wrap">{{item.shop_name}}</div>
+             <div class="col col-20">{{item.order_tot_amount | currency : 'INR' : 0}}</div>
+             </a>-->
+             <div ng-repeat="(key,value) in sellerOrders | groupBy: 'shop_name'" >
+                 <span class="row item item-stable item-divider icon-right" ng-class="{active: isGroupShown(key)}" ng-click="toggleGroup(key)"> <!--ng-click="modal.show()"-->
+                     <span class="col icon ion-android-list"> <label class="subdued dark"><b>{{key}} </b> <i class=""></i></label> </span>
+                     <span class="col col-right"><label class="subdued dark"> {{ value |toArray:true| map:'order_tot_amount' | sum  | currency:"&#8377;" : 0 }}</label></span>
+                      <!--<div class="spacer" style="width: 150px;"> </div> --> 
+                </span>
+                <div class="list" >
+                   <ion-item  ng-repeat="item in value | orderBy:'order_status'  | orderBy:'order_tot_amount' | reverse "  class="row item " ng-click="viewOrderDetails({{item.order_id}},{{item.uid_buyer}})" ng-class="'odd'" class="item-accordion"
+                   ng-show="isGroupShown(key)"> <!--ng-click="viewOrderDetails({{item.order_id}},{{item.uid_buyer}})"-->
+                    <!--ng-click="viewOrderDetails()"
+                    ng-href="#/app/seller/sellerOrderDetails/{{item.order_id}}"-->
+                     <div class="col col-25 item item-text-wrap" ng-switch on="item.order_status | lowercase">
+                         <label class="subdued">{{item.order_id}}</label>
+                     
+                         <span ng-switch-when="new"><i class="icon ion-flag positive" ></i></span>
+                         <span ng-switch-when="fulfilled"><i class="icon ion-flag royal" ></i></span>
+                         <span ng-switch-when="partial"><i class="icon ion-flag assertive" ></i></span>
+                         <span ng-switch-when="confirmed"><i class="icon ion-flag balanced" ></i></span>
+                         <span ng-switch-when="closed"><i class="icon ion-flag dark" ></i></span>
+                     </div>
+                       <div class="col c0l-50 item item-text-wrap"><label class="subdued">{{item.order_creation_time | limitTo :16}}</label></div>
+                        <div class="col col-25 item col-right " >
+                            <label class="subdued">{{item.order_tot_amount | currency:"&#8377;" : 0}}</label> 
+                            <!--<div class="spacer" style="width: 10px;"></div>
+                            <div ng-switch on="item.user_category" >
+                                <div ng-switch-when="platinum" class="subdued item-icon-right"><i class="icon ion-person royal" ></i></div>
+                                <div ng-switch-when="gold" class="subdued item-icon-right"><i class="icon ion-ios-person energized" ></i></div>
+                                <div ng-switch-when="silver" class="subdued item-icon-right"><i class="icon ion-ios-person balanced" ></i></div>
+                                <div ng-switch-when="normal" class="subdued item-icon-right"><i class="icon ion-ios-person positive" ></i></div>
+                            </div>-->
+                        </div>
+                     </ion-item>
+                </div> 
+             </div>
+              <div class="spacer" style="height:20px"></div>
+             <!--<div ng-repeat="(key,value) in sellerOrders | groupBy: 'uid_buyer'">
+                 <span class="row item-divider icon-right">
+                     {{key}}  <i class="icon ion-ios-list-outline"></i> 
+                 </span>
+                <div class="list" >
+                   <a  ng-repeat="item in value" class="row item" ng-click="viewOrderDetails({{item.orderId}})">
+                    //href="#/app/seller/sellerOrderDetails/{{item.orderId}}"
+                     <div class="col col-20 item-text-wrap">{{item.orderId}}</div>
+                     <div class="col c0l-60 item-text-wrap">{{item.uid_buyer}}</div>
+                     <div class="col col-40 ">{{item.ord_tot_amount | currency : 'INR' : 0}}</div>
+                     </a>
+                </div>
+             </div>-->
+        </div>
+        </ion-content>
+        <ion-footer-bar class="button-bar bar-stable">
+            <i class="icon ion-flag positive" > New</i>  <div class="spacer" style="width: 25px;"></div>
+            <i class="icon ion-flag assertive"> Partial</i>  <div class="spacer" style="width: 25px;"></div>
+            <i class="icon ion-flag balanced" > Confirmed</i> <div class="spacer" style="width: 25px;"></div>
+            <i class="icon ion-flag dark" > Closed</i>         <div class="spacer" style="width: 25px;"></div>
+      </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,118 @@
+<ion-view view-title="Order# {{orderId}} Confirmation and shipping" class="label" cache-view="false" >
+     <!-- <ion-nav-view name="menuContent"></ion-nav-view>-->
+    <div class="bar bar-subheader bar-royal">
+        <span class="label icon icon-left ion-ios-cart">Buyer: {{orderDetails[0].shop_name}}</span>
+    </div>
+    <ion-content padding="true" scroll="true" class="padding scroll-bg has-subheader">
+       <!--OCID- {{orderConfItemDetails}}
+       OCD- {{orderConfDetails}}-->
+       <!--OD- {{orderDetails}}
+       OID- {{orderItemDetails}}-->
+       <!--<div ng-hide="true">OID- {{orderItemDetails}} </div>-->
+        <div ng-controller="SellerOrderConfCtrl">
+            <ion-scroll direction="y" style="width: 100% ;height: 100% !important;"> 
+                <div class="list" ng-repeat="row in orderConfItemDetails">
+                      <div class="item item-avatar-right item-light">
+                        <img  ng-src="{{productImageUrl}}{{row.product_id}}/index/0" err-SRC="img/default.jpg"> 
+                        
+                        <!--<h2>
+                            <b></b>{{row.product_name}} 
+                            <span class="item-note" >[ ID: {{row.product_id | uppercase}} ]</span>
+                        </h2>
+                        <br><div class="item-text-wrap">{{row.product_description }}</div>
+                            <br><span class="subdued positive">    Lot Size: </span>
+                            <span class="subdued dark">
+                             <b>{{row.lot_size}}</b></span>
+                            <span class="subdued positive">        Price: </span>
+                            <span class="subdued dark">  <b>{{row.price | currency:"&#8377;" : 2 }}</b></span>
+                      </div>
+                        <div class="item tabs tabs-secondary item-clear" >
+                            <span class="tab-item" >
+                                <b><span class="label positive" style="padding-left:0px; padding-right:0px">Quantity:</span>
+                                </b><span class="subdued dark"><b>{{ row.order_qty }}</b></span>
+                            </span>
+                            <span class="tab-item">
+                                <b><span class="label positive" style="padding-left:0px; padding-right:0px">Estimate:</span>                                              <span class="subdued dark">   {{ row.price * row.order_qty | currency:"&#8377;" : 2}}</span>
+                                </b>
+                            </span>
+                        </div> -->  
+                            <h2>
+                                <b>{{row.product_name}} </b>
+                               <!-- <span class="item-note light" >[ ID: {{row.product_id | uppercase}} ]</span>-->
+                            </h2>
+                            <!--{{row.product_id}}-->
+                            <br><div class="item-text-wrap">{{row.product_description }}</div>
+                            <br>
+                            <div class="row row-center">
+                               <label class="col col-20 col-offset-10 subdued positive">Lot Size: </label>
+                               <label class="col col-25 col-offset-10 subdued dark">{{row.lot_size}}</label>
+                               <label class="col col-20 col-offset-10 subdued positive">Price: </label>
+                               <label class="col col-25 subdued dark">{{row.price | currency:"&#8377;" : 2 }}</label>
+                            </div>
+                            <div class="row row-center item item-divider item-stable" ng-if="orderStatus && !row.checked">
+                                <label class="col col-25 col-offset-10 col-center subdued positive"> 
+                                    Quantity:
+                                </label>
+                                <label class="col col-25 col-center subdued dark"> 
+                                    {{ row.order_qty }}
+                                </label>
+                                <label class="col col-20  col-center subdued positive"> 
+                                    Estimate: 
+                                </label>
+                                <label class="col col-25 col-center subdued dark"> 
+                                    {{ row.price * row.order_qty | currency:"&#8377;" : 2}} 
+                                </label>
+                            </div>
+                </div> 
+            </ion-scroll>
+        </div>
+    </ion-content>
+      <!--   <div class="spacer" style="height: 0px;"></div>
+       <div class="list" style="position: absolute; bottom: 20px; width: 100%">
+          <label class="item item-input">
+            <span class="input-label">Customer Name:</span>
+              {{orderDetails[0].customer_name}}
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Customer Phone #:</span>
+              {{orderDetails[0].customer_phone}}
+          </label>         
+         <label class="item item-input">
+            <span class="input-label">Customer TIN #:</span>
+             {{orderDetails[0].customer_tin}}
+          </label>
+         <label class="item item-input">
+            <span class="input-label">Customer ST #:</span>
+              {{orderDetails[0].customer_st}}
+          </label> 
+        <label class="item item-input">
+            <span class="input-label">Customer CST #:</span>
+              {{orderDetails[0].customer_cst}}
+          </label>    
+           
+        <label class="item item-input">
+            <span class="input-label">Shipping Address:</span>
+              {{orderDetails[0].shipping_address}}
+          </label>
+         <label class="item item-input">
+            <span class="input-label">Expected Delivery:</span>
+              
+          </label>     
+        <label class="item item-input">
+            <span class="input-label">Tracking Number#:</span>
+              
+          </label>
+        </div>-->
+ 
+    <ion-footer-bar align-title="left" class="bar-stable">
+      <div class="button button-bar button-clear" >
+<!--        <button class="button button-balanced" ng-click="modal.show()">Buyer<i class="icon icon-small ion-ios-information-outline dark small"></i></button>-->
+        <button class="button icon-left button-small ion-help-circled button-clear" ng-click="modal.show()"><h5 class="subdued dark">Buyer<!--<i class="icon icon-small ion-help-circled assertive"></i>--></h5></button>
+        <button class="button icon-left ion-checkmark-circled icon-balanced button-small button-clear" ng-click="confirmOrderProcess(orderConfDetails[0].customer_id,orderConfDetails[0].order_id)" ><h5 class="subdued dark">Confirm </h4>
+        </button>
+        <button class="button icon-left ion-email  button-small button-clear" ng-click="alertWIP()"><!--<h4><i class="icon icon-small ion-email dark"></i></h4>--></button>
+        <button class="button icon-left button-small ion-printer  button-clear" ng-click="alertWIP()"><!--<h4><i class="icon icon-small ion-printer dark"></i></h4>--></button>
+      </div>
+    </ion-footer-bar>
+
+</ion-view>

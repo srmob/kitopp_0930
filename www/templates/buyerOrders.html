@@ -1,0 +1,108 @@
+<ion-view view-title="My Orders" class="subdued" >
+       <ion-nav-view name="Items-Content"></ion-nav-view>
+    <div class="bar bar-subheader bar-royal row row-center">
+        <div class="col col-20 item-text-wrap subdued ">Order No</div>
+        <div class="col col-20 subdued">Status</div>
+        <div class="col c0l-33 item-text-wrap subdued">Date</div>
+        <div class="col col-33 col-right subdued">Estimate</div>
+        
+    </div>
+    <ion-content padding="true"  class="has-header"> 
+         <!--<ion-header-bar class="row bar-positive">
+             <div class="col col-15 item-text-wrap ">Order No</div>
+             <div class="col c0l-50 item-text-wrap ">Seller Name</div>
+             
+         </ion-header-bar>-->
+         
+        <div class="spacer" style="height: 40px;"></div>
+         <div class="list">
+          <!--<a  ng-repeat="item in sellerOrders" class="bgColor item row " ng-click="viewOrderDetails()" >ng-href="#/app/seller/sellerOrderDetails"
+             <div class="col col-20 item-text-wrap">{{item.order_id}}</div>
+             <div class="col c0l-60 item-text-wrap">{{item.shop_name}}</div>
+             <div class="col col-20">{{item.order_tot_amount | currency : 'INR' : 0}}</div>
+             </a>-->
+             <div ng-repeat="(key,value) in orders | filter:filterBuyerCategory| groupBy: 'shop_name' " >
+                
+                <div class="row item item-stable" ng-class="{active: isGroupShown(key)}" ng-click="toggleGroup(key)">
+                 <span class="col col-60 icon ion-android-list "> <label class="subdued dark">{{key}} Orders  <i class=""></i></label>  </span>
+                    <span class="col  col-33 col-offset-33 col-right"> <label class="subdued dark">{{ value |toArray:true| map:'order_tot_amount' | sum  | currency:"&#8377;" : 2 }}</label></span>
+                 </div>
+                <div class="list" >
+                   <div  ng-repeat="item in value | orderBy:'order_creation_time' | reverse" class="row item" ng-class-odd="'odd'" ng-class-even="'even'" class="item-accordion"
+                   ng-show="isGroupShown(key)"> 
+                   
+                       <div class="col col-20 item-text-wrap"><label class="subdued">{{item.order_id}}</label></div>
+                       <div class="col col-10 col-left" ng-switch on="item.order_status">
+                         <span ng-switch-when="new"><i class="icon ion-flag  icon-right positive" ></i></span>
+                         <span ng-switch-when="fulfilled"><i class="icon ion-flag royal" ></i></span>
+                         <span ng-switch-when="partial"><i class="icon ion-flag assertive" ></i></span>
+                         <span ng-switch-when="confirmed"><i class="icon ion-flag balanced" ></i></span>
+                         <span ng-switch-when="closed"><i class="icon ion-flag dark" ></i></span>
+                     </div>
+                     
+                       <div class="col c0l-33"><label class="subdued item-text-wrap">{{item.order_creation_time | limitTo :16}}</label></div>
+                       <div class="col col-33 col-right "><label class="subdued">{{item.order_tot_amount | currency:"&#8377;" : 2}}</label></div>
+                     
+                     <!--<div ng-switch on="item.user_category">
+                         <div ng-switch-when="Platinum"><i class="icon ion-person royal" ></i></div>
+                         <div ng-switch-when="Gold"><i class="icon ion-ios-person energized" ></i></div>
+                         <div ng-switch-when="Silver"><i class="icon ion-ios-person stable" ></i></div>
+                         <div ng-switch-when="Normal"><i class="icon ion-ios-person dark" ></i></div>
+                     </div>-->
+                    
+                     </div>
+                </div>
+             </div>
+             
+        </div>
+        </ion-content>
+        <ion-footer-bar class="row bar-light">
+            <button class="button button-small button-clear" ng-click="filterBuyerOrders('new')" >
+                <i class="icon ion-flag positive" ><label class="subdued ">New</label></i> 
+            </button>
+            <div class="spacer" style="width: 0px;"></div>
+            <button class="button button-small button-clear" ng-click="filterBuyerOrders('partial')" >
+                <i class="icon ion-flag assertive"><label class="subdued ">Partial</label></i> 
+            </button>
+             <div class="spacer" style="width: 0px;"></div>
+            <button class="button button-small button-clear" ng-click="filterBuyerOrders('confirmed')" >
+                <i class="icon ion-flag balanced" ><label class="subdued ">Confirmed</label></i> 
+            </button>
+             <div class="spacer" style="width: 0px;"></div>
+            <button class="button button-small button-clear" ng-click="filterBuyerOrders('closed')" >
+                <i class="icon ion-flag dark" ><label class="subdued ">Closed</label></i>       
+            </button>
+            <div class="spacer" style="width: 0px;"></div>
+             <!--All orders By krishna sep-27-->
+            <button class="button button-small button-clear" ng-click="filterBuyerOrders('')" >
+                <i class="icon ion-flag " style="color:orange"><label class="subdued ">All</label></i>       
+            </button>
+            
+      </ion-footer-bar>
+       <!--<ion-content padding="true" scroll="false" >
+     <ion-scroll direction="yx" style="width: 100% ;height: 100% !important;" scrollbar-x="false" delegate-handle="head" zooming="true" on-scroll="scrollMirror('list', 'head')">
+        <div class="item item-header item-calm row row-item min-705">
+          <div class="col col-left col-sep min-5 item-text-wrap"> ID</div>
+          <div class="col col-left col-sep min-20 item-text-wrap">Product Name</div>
+          <div class="col col-left col-sep min-50 item-text-wrap">Product desc</div>
+          <div class="col col-left col-sep min-10 item-text-wrap">Order Quantity</div>
+          <div class="col col-left col-sep min-50 item-text-wrap">Price</div>
+          <div class="col col-left col-sep min-50 item-text-wrap">Amount</div>
+
+        </div>
+
+        <div class="item row row-item  min-705" ng-repeat="row in orders | orderBy: '-order_id' : reverse">
+                  <div class="col item-dark col-left col-sep min-5 item-text-wrap" >{{row.order_id}}</div>
+                  <div class="col item-dark col-left col-sep min-20 item-text-wrap" >{{row.product_name}}</div>
+                  <div class="col item-dark col-left col-sep min-50 item-text-wrap">{{row.product_desc}}</div>
+                  <div class="col item-dark col-left col-sep min-10 item-text-wrap">{{ row.order_qty }}</div>
+                  <div class="col item-dark col-left col-sep min-50">{{row.order_price | currency : $ : 0}}</div>
+                  <div class="col item-dark col-left col-sep min-50">{{row.order_qty * row.order_price | currency : $ : 0 }}</div>
+          </div>
+        </ion-scroll>
+    
+        <div class="spacer" style="height: 40px;"></div>
+        
+    </ion-content>-->
+
+</ion-view>

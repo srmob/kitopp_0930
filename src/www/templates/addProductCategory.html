@@ -1,0 +1,53 @@
+<ion-view view-title="Select Category" cache-view="false">
+    <ion-nav-buttons side="right">
+     <!--  For Future requirements 
+         <button class="button icon ion-ios-plus-empty button-clear button-balanced" ng-click="addCatgAndSubCatg()">Add</button>-->
+      <!--<button class="button icon ion-edit button-clear button-assertive" ng-click="edit()">Edit</button>-->
+    </ion-nav-buttons> 
+    <ion-header-bar class="bar-positive" >
+         <h2 class="title">Categories</h2>
+         <button class="button icon ion-plus button-balanced">Add</button>
+      </ion-header-bar>
+    <form name="manageCategoryForm">
+       <ion-content > <!--sc - {{subCatgCheckboxes.sub_category_id}}
+       length= {{subCatgCheckboxes.sub_category_id.length}}-->
+       <!--  <div class="list">
+            <li class="item item-divider" ng-repeat="group in masterCategory" ng-click="showsublist($index)">
+               
+                <label class="subdued">{{group.category_name}}</label>
+               </br></br>
+               <ul ng-class="group.sublist ? 'slidedown' : 'slideup'" >
+                  <li class="item item-avatar item-royal slideup" ng-repeat="item in group.sub_category_list" >
+                  <label class="checkbox checkbox-dark checkbox-square"> <input type="checkbox"  checklist-model="checkboxes.sub_category_id" checklist-value="group.sub_category_list[$index].sub_category_id" checklist-change="checkBoxCatgClicked([$index])" ></label>
+                      <label class="subdued">{{item.sub_category_name}}</label>
+                  </li> 
+               </ul>
+            </li>
+         </div>-->
+         
+         <ion-list>
+        <div ng-repeat="group in masterCategory">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+             {{group.category_name}}
+             
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="item in group.sub_category_list"
+                    ng-show="isGroupShown(group)">
+            <label class="checkbox checkbox-dark checkbox-square"> <input type="checkbox"  checklist-model="subCatgCheckboxes.sub_category_id" checklist-value="group.sub_category_list[$index].sub_category_id" checklist-change="checkBoxCatgClicked(group.sub_category_list[$index].sub_category_id,group.sub_category_list[$index])" ng-checked="group.sub_category_list[$index].exist" ></label>{{item.sub_category_name}}
+            <!-- For Future requirements <div ng-if="$last"> 
+                <button class="button button-clear button-balanced" ng-click="addSubCatgToCatg(group.category_id,group.category_name)"><i class="icon ion-plus"></i></button></div>-->
+          </ion-item>
+        </div>
+      </ion-list>
+      </ion-content>
+      <div ng-hide="subCatgCheckboxes.sub_category_id.length == 0 ">
+         
+          <ion-footer-bar class="button-bar bar-balanced">
+                <button class="button button-clear" type="submit" ng-disabled="manageCategoryForm.$invalid" ng-click="enableCatgAndSubCatgToSeller()">Save</button>
+            </ion-footer-bar>
+        </div>
+   </form>
+</ion-view>

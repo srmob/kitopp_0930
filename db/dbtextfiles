@@ -1,0 +1,21 @@
+db.transaction(function(tx) {
+    tx.executeSql('DROP TABLE IF EXISTS test_table');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
+
+    tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
+      console.log("insertId: " + res.insertId + " -- probably 1");
+      console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+
+      tx.executeSql("select count(id) as cnt from test_table;", [], function(tx, res) {
+        console.log("res.rows.length: " + res.rows.length + " -- should be 1");
+        console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
+      });
+
+    }, function(e) {
+      console.log("ERROR: " + e.message);
+    });
+  });
+  
+  insert into user_auth values("123s1","abc@kk.com","1091","true","seller",3);
+
+select count(1),user_type,user_role_id from user_auth where  device_id="123s1" and pin=1091 and auth_f is "true"

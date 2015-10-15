@@ -1,0 +1,83 @@
+<ion-view title="Pin Code" cache-view="false">
+    <ion-header-bar class="bar-dark" align-title="center">
+      <h1 class="title"><img class="dark title-image" data-ng-src="img/Kitaki_Logo.gif" width="40%" height="100%"></h1>
+    </ion-header-bar>
+    
+    <ion-content class="center-vertical" class="has header">
+    <div class="bar  bar-stable row">
+        <span class="col col-offset-25 col-bottom  icon icon-left ion-unlocked"><label class="subdued assertive"><b>Please Enter Your Pin </b></label></span>
+    </div>
+        <div class="spacer" style="height: 12%;"></div>
+           
+            <div class="row row-bottom row-center" style="text-align: center;">
+               <div class="spacer" style="width:25px"></div>
+                <div class="col col-10 col-center col-offset-25">
+                    <input type="password"   value="{{passcode.substring(0, 1)}}" disabled>
+                </div>
+                <div class="col col-10 ">
+                    <input type="password" value="{{passcode.substring(1, 2)}}" disabled>
+                </div>
+                <div class="col col-10 ">
+                    <input type="password"  value="{{passcode.substring(2, 3)}}" disabled>
+                </div>
+                <div class="col col-10  ">
+                    <input type="password"  value="{{passcode.substring(3, 4)}}" disabled>
+                </div>
+            </div>
+        
+            
+        <div style="margin-top: 50px;" >
+            <div class="row">
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline  button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(1)">1</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(2)">2</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(3)">3</button>
+                </div>
+            </div>
+             <div class="spacer" style="height: 11px;"></div>
+            <div class="row">
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(4)">4</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(5)">5</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;button-outline " ng-click="add(6)">6</button>
+                </div>
+            </div>
+            <div class="spacer" style="height: 11px;"></div>
+            <div class="row">
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(7)">7</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(8)">8</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;" ng-click="add(9)">9</button>
+                </div>
+            </div>
+            <div class="spacer" style="height: 11px;"></div>
+            <div class="row">
+                <div class="col col-11 col-offset-10">
+                   
+                        <button class="button icon ion-refresh button-outline button-assertive button-stretch " style="border-radius: 100px;"ng-click="clear()"></button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button button-outline button-assertive button-stretch " style="border-radius: 100px;"ng-click="add(0)">0</button>
+                </div>
+                <div class="col col-11 col-offset-10">
+                    <button class="button icon ion-backspace-outline button-outline button-assertive button-stretch" style="border-radius: 100px;" ng-click="delete()"></button>
+                </div>
+            </div>
+        </div>
+       
+    </ion-content>
+<div class="bar bar-footer col col-center" style="text-align:center">&copy;kitaki 2015
+        </div>
+</ion-view>

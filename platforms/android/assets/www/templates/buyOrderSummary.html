@@ -1,0 +1,74 @@
+<ion-view view-title="My Orders" cache-view="false" >
+   <form name="mainbuyerOrderForm">
+    <ion-nav-view name="menuContent"></ion-nav-view>
+    <div class="bar bar-subheader bar-royal">
+            <label class="subdued"> {{shopName}} </label>
+    </div>
+    <ion-content padding="true" scroll="false" class="has header has-subheader"> <!--orderTotal={{orderTotal}}-->
+       <ion-scroll direction="y" style="width: 100% ;height: 100% !important;"> 
+            <div class="list" ng-repeat="(key,value) in orders | groupBy:'product_sub_catg_name'">
+               <div class="row">
+                    <span class="col col-60 item item-positive"> <label class="subdued">{{key | uppercase }} </label> </span>
+                   <span class="col col-40 item item-positive col-right"> <label class="item-note">Total : {{ orderTotal | currency:"&#8377;" : 2}} </label> </span>
+                </div>
+                <div class="list card" ng-repeat="row in value" ng-form='rowOrderForm' name="rowOrderForm" ng-init="setOrderTotal(value)" > 
+                      <div class="item item-thumbnail-left">
+                            <img ng-src="{{productImageUrl}}{{row.product_id}}/index/0" err-SRC="img/default.jpg">
+                            <h2>
+                              <label class="subdued dark"><b>{{row.product_name}}</b></label></h2>
+                              <P><label class="subdued dark item-text-wrap descEllip">{{row.product_desc}}</label></P>
+                     </div>
+
+                    <div class="row row-bottom"> 
+                        <label class="col col-25 subdued positive">
+                            Lot Size: 
+                        </label>
+                        <label class="subdued dark col col-20">
+                            {{row.product_lot_size}}
+                        </label>
+                         <label class="col col-25 subdued positive col-right">
+                            Price: 
+                        </label>
+                        <label class="subdued dark col col-25 col-left">
+                            {{ row.order_price | currency:"&#8377;" }}
+                        </label>
+                    </div>
+                    <div class="row row-bottom item item-divider item-stable">
+                        <label class="col col-50 col-offset-10 col-center item item-input item-divider item-stable" 
+                               ng-class="{ 'has-error-lr' : rowOrderForm.order_qty.$invalid,
+                                             'valid' : rowOrderForm.order_qty.$valid}"> 
+                              <label class=" subdued positive"> Quantity: </label>
+                             <input type="number" 
+                                    ng-model="row.order_qty" value='{{row.order_qty}}' 
+                                               name="order_qty" min="1" maxlength="10" ng-pattern="onlyNumbers1"                                                              placeholder="Quantity(min1)" ng-change="setOrderTotal(value)" style="background-color:#EBEBE0" required>
+
+                        </label>
+                        <label class="col col-25 subdued positive col-right">
+                            Estimate: 
+                        </label>
+                        <label class="subdued dark col col-25 col-left">
+                            {{ row.order_price * row.order_qty | currency:"&#8377;" :2  }} 
+                        </label>
+                        <!--<label class="col col-right subdued positive col-center"> 
+                            Estimate:  
+                            <label class="subdued dark">
+                              
+                            </label>
+                        </label>-->
+                    </div>
+                    
+            </div>
+                <!--</div> -->
+            </div>
+            
+        </ion-scroll>
+        <div class="spacer" style="height: 10px;"></div>
+        <div align-title="center" class="bar bar-footer button-bar bar-balanced">
+            <button class="button button-clear" type="submit" ng-disabled="mainbuyerOrderForm.$invalid" ng-click="placeOrder()">Order Now</button>
+        </div>
+    </ion-content>
+        <!--<ion-footer-bar align-title="center" class="button-bar bar-balanced">
+        <button class="button button-clear" type="submit" ng-disabled="mainbuyerOrderForm.$invalid" ng-click="placeOrder()">Order Now</button>
+        </ion-footer-bar>-->
+    </form>
+</ion-view>

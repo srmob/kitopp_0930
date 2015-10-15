@@ -1,0 +1,28 @@
+<ion-view view-title="Buyer Category" cache-view="false">
+    
+    <form name="buyerCatgForm"  class="simple-form">
+        <ion-content> 
+          <div ng-repeat="row in buyersList" class="row  row-center list list-inset" >
+               <div class="col col-33 col-stable" >
+                    <label class="subdued royal">{{row.name}}</label>
+                </div>
+                <div class="col col-67 item" >
+                  <div class="row row-center">
+                   <select ng-model="buyer.plan" 
+                        ng-options="cat.id as cat.name for cat in userPlans | orderBy: 'cat.name'"
+                        class="item item-select item-stable">
+                        <option value="" disabled default selected>-user plan-</option>
+                    </select>
+                   
+                
+                   <label class="checkbox checkbox-dark checkbox-square"> 
+                        <input type="checkbox"  checklist-model="row.checked" checklist-value="row.id" checklist-change="" > 
+                    </label> 
+                    <button class="button button-small button-assertive" type="submit" ng-disabled="buyerCatgForm.$invalid">key</button></div>
+                </div>
+           
+            </div>
+        </ion-content>
+    </form>
+    
+</ion-view>

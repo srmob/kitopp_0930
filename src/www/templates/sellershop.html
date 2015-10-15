@@ -1,0 +1,73 @@
+<ion-view view-title="My Shop" cache-view="false">
+   
+    <ion-header-bar class="bar bar-light bar-subheader">
+        <div class="row">
+            <div class="col col-30">
+                <select ng-model="selectedDept" 
+                    ng-options="dept.product_catg_name for dept in productCatg | unique:'product_catg_name' | orderBy:'product_catg_name'"
+                    class="item item-input item-select item-positive">
+                    <option value="" disabled default selected>products category</option>
+                </select>
+            </div>
+            <div class="col col-30" ng-hide="selectedDept.product_catg_name == null ">
+                <select ng-model="subCatg" 
+                    ng-options="dept as dept.product_sub_catg_name for dept in productCatg | unique:'product_sub_catg_name' | orderBy:'product_sub_catg_name' | filter:selectedDept.product_catg_name"
+                    class="item item-input item-select item-positive" ng-click="getProductsForID(selectedDept)">
+                    <option value="" disabled default selected>product sub category</option>
+                </select>
+            </div>
+        </div>
+    </ion-header-bar>
+   
+   <ion-content class="has-header has-subheader">
+     <div class="item item-image" style="height:180px">
+            <img class="item fullimage" src="{{myShopImgUrl}}" err-SRC="img/default.jpg">
+        </div>
+      <!-- Sub-{{subCatg.product_sub_catg_name}} --><!--products2 =(products | filter:searchProduct)-->
+            <ion-item class="row" ng-repeat="row in products2 =(products)  | orderBy: '-product_id' | filter:subCatg.product_sub_catg_name" ng-if="$index % 2 === 0">
+                <div class="col col-50  list inset" style="border: 5px" ng-if="$index < products2.length" ng-click="selectProductEdit({{products2[$index].product_id}})" >
+                    <!--<div class="row item item-divider item-calm">
+                        <div class="col col-75 item-text-wrap label dark"> {{products2[$index].product_name}} </div>
+                        <div class="col col-25 item-text-wrap "> <span class="item-note label dark">[{{products2[$index].product_id}}]</span>
+                        </div>
+                    </div>-->
+                    <div class="row item">
+                        <div class="col wrapper"> 
+                            <img class="img-thumbnail" data-ng-src="{{productImageUrl}}{{products2[$index].product_id}}/index/0" err-SRC="img/default.jpg"> 
+                        </div> 
+                        <div class="description">
+                           <p class="description_content">
+                               {{products2[$index].product_name}}
+                               [{{products2[$index].product_id}}]
+                           </p>
+                        </div>                      
+
+                    </div> 
+                    
+                </div>
+                <div class="col col-50  list inset" style="border: 1px" ng-if="$index+1 < products2.length" ng-click="selectProductEdit({{products[$index+1].product_id}})"  >
+                    <!--<div class="row item item-divider item-calm">
+                        <div class="col col-75 item-text-wrap label dark"> {{products2[$index+1].product_name}} </div>
+                        <div class="col col-25 item-text-wrap "> <span class="item-note label dark">[{{products2[$index+1].product_id}}]</span>
+                        </div>
+                    </div>-->
+                    <div class="row item">
+                        <div class="col wrapper"> 
+                            <img class="img-thumbnail"  data-ng-src="{{productImageUrl}}{{products2[$index+1].product_id}}/index/0" err-SRC="img/default.jpg"> 
+                        </div> 
+                        <div class="description">
+                           <p class="description_content">
+                               {{products2[$index+1].product_name}}
+                               [{{products2[$index+1].product_id}}]
+                           </p>
+                        </div> 
+                    </div> 
+                </div>
+            </ion-item>
+        
+            
+          </div>
+        </ion-content>
+       
+    </form>
+</ion-view>

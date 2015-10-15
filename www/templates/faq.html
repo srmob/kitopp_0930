@@ -1,0 +1,194 @@
+<ion-view view-title="FAQ" cache-view="false" >
+     <!--<ion-nav-view name="menuContent"></ion-nav-view>-->
+     
+       <ion-content padding="true"  class="padding scroll-bg"> 
+            <div class="spacer" style="height: 40px;"></div>
+                <div class="bar bar-subheader">
+                    <h2 class="title">FAQ</h2>
+                </div>
+            <div class="spacer" style="height: 40px;"></div>
+               
+            <div class="item-body">
+                <p style="text-align:justify"><h2><strong style="font-size:18px"FAQs on developing new products.</strong></h2>
+                <div ng-click="toggleGroup(1)"> What is Kitaki?</div><br/>
+                <div  ng-show="isGroupShown(1)">
+	Kitaki is a platform which enables connection between Manufacturers, Dealers, and Wholesalers to their customers. Our tools and services allow exponential 
+
+business expansion opportunity by enabling digitally with next gen mobile application platform. 
+Our unique Business connect model enhances transactions through trusted contacts.
+Kitaki is member-only Business to Business market place. 
+               <br/><br/> </div>
+                <div ng-click="toggleGroup(2)">
+Is there a fee for setting up my store ?
+               </div> <br/>
+                <div  ng-show="isGroupShown(2)">
+	No
+               <br/><br/> </div>
+<div ng-click="toggleGroup(3)">How much time it will take to make my store on app ?<br/></div> <br/>
+<div ng-show="isGroupShown(3)">10 Minutes<br/><br/></div>
+                
+<div ng-click="toggleGroup(4)">Can anyone visit my store ?<br></div> <br/>
+<div ng-show="isGroupShown(4)">Your Trusted Customers can visit your Store.<br><br></div>
+                
+<div ng-click="toggleGroup(5)">What is Trusted business connect relationship?<br></div> <br/>
+<div ng-show="isGroupShown(5)">Only your trusted customers approved by you will be able to see your store and do business with you. Our platform will enable this trusted connect.<br><br></div>
+                
+<div ng-click="toggleGroup(6)">How do I invite my customer on Kitaki ?<br></div> <br/>
+<div ng-show="isGroupShown(6)">Using Business request or Invite option.
+<br><br></div>
+                
+<div ng-click="toggleGroup(7)">How many items I can enroll ?<br></div> <br/>
+<div ng-show="isGroupShown(7)">Please see the document on products you can enroll as per your plan.<br><br>
+</div>
+<div ng-click="toggleGroup(8)">Can I have multiple prices for the products?<br>
+</div> <br/>
+<div ng-show="isGroupShown(8)">Yes<br><br>
+	</div>
+<div ng-click="toggleGroup(9)">Can I price based on order value or lot size ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(9)">No, you can price based on your Trusted customer.	<br><br>
+</div>
+<div ng-click="toggleGroup(10)">Is this a website ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(10)">	No<br><br>
+</div>
+<div ng-click="toggleGroup(11)">What are the charges?<br>
+</div> <br/>
+<div ng-show="isGroupShown(11)">It is ABSOLUTELY FREE right now.<br><br>
+</div>
+<div ng-click="toggleGroup(12)">Why am I being asked for tax registration number?<br>
+</div> <br/>
+<div ng-show="isGroupShown(12)">	
+	Please see terms and conditions.<br><br>
+</div>
+<div ng-click="toggleGroup(13)">
+Is my personal data safe?<br>
+</div> <br/>
+<div ng-show="isGroupShown(13)">
+	Yes, your personal data is absolutely safe and Kitaki's one of the key objective is to keep our Trusted customer's data safe.<br><br>
+</div>
+<div ng-click="toggleGroup(14)">
+How will my customers see my shop / store ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(14)">
+	They will see your shop on the App.<br><br>
+</div>
+<div ng-click="toggleGroup(15)">
+How will my customer pay me ?
+</div> <br/>
+<div ng-show="isGroupShown(15)">Your trusted customer will pay as per your current business style. Kitaki does not have payment module.<br><br>
+</div>
+<div ng-click="toggleGroup(16)">Will my customer be able to see all my products ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(16)">
+	Yes<br><br>
+</div>
+<div ng-click="toggleGroup(17)">	
+Will my customer be able to search my shop ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(17)">
+	Yes<br><br>
+</div>
+<div ng-click="toggleGroup(18)">
+Which are all the product category supported?<br>
+</div> <br/>
+<div ng-show="isGroupShown(18)">
+	Kitaki support all the product category under Indian Business law. Please refer the support document.<br><br>
+</div>
+<div ng-click="toggleGroup(19)">
+Can i see my own shop / store in the App ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(19)">
+	yes, please click on My Shop<br><br>
+</div>
+<div ng-click="toggleGroup(20)">
+Who will ship the product?<br>
+</div> <br/>
+<div ng-show="isGroupShown(20)">Your respective Seller will ship the products as per your current process. Right now, Kitaki is not having Shipping facility.	<br><br>
+</div>
+<div ng-click="toggleGroup(21)">Who can register ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(21)">
+	Any WholeSaler/Retailer/Manufacturerer/Importer can register<br><br>
+</div>
+<div ng-click="toggleGroup(22)">Why is my tax details are taken ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(22)">
+    Please refer to support document.<br><br>
+</div>
+<div ng-click="toggleGroup(23)">
+why am I not able to see any sellers in Myshops screen?<br>
+</div> <br/>
+<div ng-show="isGroupShown(23)">
+	Your Seller will approve and make you a trusted customer untill then, patience.<br>
+</div>
+<div ng-click="toggleGroup(24)">
+Is the price inclusive of all taxes?<br>
+</div> <br/>
+<div ng-show="isGroupShown(24)">
+	Please contact your Seller.<br><br>
+</div>
+<div ng-click="toggleGroup(25)">
+Will my information be shared with government agencies?<br>
+</div> <br/>
+<div ng-show="isGroupShown(25)">
+	Our platform has not received any instructions from Government to share your information and hence, we are not sharing any of your information to government agency.<br><br>
+</div>
+<div ng-click="toggleGroup(26)">
+How will I get items from the seller?<br>
+</div> <br/>
+<div ng-show="isGroupShown(26)">
+	You will get your items as per Seller's mode of transport. Please check with your Seller.<br><br>
+</div>
+<div ng-click="toggleGroup(27)">	
+Do I need to pay transport charges?<br>
+</div> <br/>
+<div ng-show="isGroupShown(27)">
+	You will get your items as per Seller's mode of transport. Please check with your Seller.<br><br>
+</div>
+<div ng-click="toggleGroup(28)">
+If I loose my phone, will I loose all information?<br>
+</div> <br/>
+<div ng-show="isGroupShown(28)">
+                No<br><br>
+</div>
+<div ng-click="toggleGroup(29)">	
+Who will help if I forget my PIN?<br>
+</div> <br/>
+<div ng-show="isGroupShown(29)">
+	Please contact Kitaki.<br><br>
+</div>
+<div ng-click="toggleGroup(29)">
+How can delete a product from my shop?<br>
+</div> <br/>
+<div ng-show="isGroupShown(29)">
+	Manage Product in Menu will help you to delete product.<br><br>
+</div>
+<div ng-click="toggleGroup(30)">
+Who is responsible for providing reciept for goods sold?<br>
+</div> <br/>
+<div ng-show="isGroupShown(30)">	Your Seller will provide the receipt.<br><br>
+</div>
+<div ng-click="toggleGroup(31)">
+Is it different than my existing business?<br>
+</div> <br/>
+<div ng-show="isGroupShown(31)">
+	Yes, now you can do business on your phone.<br><br>
+</div>
+<div ng-click="toggleGroup(32)">
+How will I know if there is a new order for me?<br>
+</div> <br/>
+<div ng-show="isGroupShown(33)">
+	Manage order will show all your new orders.<br><br>
+</div>
+<div ng-click="toggleGroup(34)">
+What are all the products we can sell on your platform ?<br>
+</div> <br/>
+<div ng-show="isGroupShown(35)">
+	Please refer to the support document.<br><br>
+    </div>
+
+	
+    </ion-content>
+</ion-view>
+

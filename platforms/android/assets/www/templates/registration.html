@@ -1,0 +1,193 @@
+<ion-view view-title="" cache-view="false" >
+    <div class="bar bar-header bar-dark">
+        <button class="button button-icon button-clear ion-android-arrow-back" ng-click="goBackToWelcome()">
+        </button>
+        <h1 class="title">User Registration</h1>
+    </div>
+    <div class="bar bar-subheader bar-clear">
+         <label class="item-inputs">
+                <!--<label class="subdued positive">User Category</label>-->
+                <select ng-model="user.category" 
+                ng-options="cat.id as cat.name for cat in userCategory | orderBy: 'cat.name'"
+                ng-change="categoryCheckerGo()" class="item item-input item-select item-dark">
+                <option value="" disabled default selected>Select User Category</option>
+                </select>
+        </label>
+    </div>
+    
+    <form name="userRegForm"  class="">
+        <ion-content class="has-header has-subheader">
+      
+            <!--<label class="item item-input">
+                <label class="subdued positive">User Category</label>
+                <select ng-model="user.category" 
+                ng-options="cat.id as cat.name for cat in userCategory | orderBy: 'cat.name'"
+                ng-change="categoryCheckerGo()" class="item item-select item-positive">
+                <option value="" disabled default selected>-Select user category-</option>
+                </select>
+            </label>-->
+            
+           <!-- <div ng-show="user.category== 2 || user.category== 1 || user.category== 3" class="list list-inset">-->
+           
+            <div ng-show="user.category!= NULL" ng-form='buyerForm' name='buyerForm'>
+                   <!--ccsi={{cameraButtonClickedForShopImage}}-->
+                   <!--imgURI_shop = {{imgURI_shop}}-->
+                    
+                <div class="item item-input">
+                   <div class="subduded dark">Shop Pic:<div class="spacer" style="width:100px"></div></div>
+                    <img ng-src="data:image/jpeg;base64,{{imgURI_shop}}" ng-model="user.img_id_shop" id="smallimage" class="img-thumbnail" style="height:200px;width:200px;" ng-show="cameraButtonClickedForShopImage" >
+                    <span class="spacer" style="width:20px"></span>
+                    <button class="button icon ion-ios-camera-outline " style="height:20px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"  ng-click="addImage_shop(0)">
+                        
+                    </button><div class="spacer" style="width:5px"></div>
+                    <button class="button icon ion-image " ng-click="addImage_shop(1)" style="height:20px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                    </button>
+                    <!--
+                    <div class="subduded dark">Shop Pic<div class="spacer" style="width:80px"></div></div>
+                    <img ng-src="data:image/jpeg;base64,{{imgURI_shop}}" ng-model="user.img_id_shop"  style="height:200px;width:300px;" ng-show="cameraButtonClickedForShopImage">
+                       
+                    <div class="row">
+                       <img ng-src="{{urlForImage(shopImage)}}" ng-show="cameraButtonClickedForShopImage" ng-model="user.img_id_shop" id="smallimage" class="full-image">
+                        <button class="button col col-20 col-offset-25 item button-small icon ion-ios-camera-outline" style="height:35px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" ng-click="addImage_shop(0)"> 
+                        </button>
+                        <button class="button col col-20 item button-small icon icon ion-image" style="height:35px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" ng-click="addImage_shop(1)"> 
+                        </button>
+                    </div>-->
+                   
+                </div>
+                <div class="spacer" style="height:20px"></div>
+                
+                <!--ccu={{cameraButtonClickedForUserImage}}-->
+                <div class="item item-input">
+                    <div class="subduded dark">User Pic:<div class="spacer" style="width:100px"></div></div>
+                    <img ng-src="data:image/jpeg;base64,{{imgURI}}" ng-model="user.img_id" id="smallimage" class="img-thumbnail" style="height:200px;width:200px;" ng-show="cameraButtonClickedForUserImage" >
+                    <span class="spacer" style="width:20px"></span>
+                    
+                    
+                    <button class="button icon ion-ios-camera-outline " style="height:20px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"  ng-click="addImage(0)">
+                        
+                    </button><div class="spacer" style="width:5px"></div>
+                    <button class="button icon ion-image " ng-click="addImage(1)" style="height:20px;border: thick solid grey;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                    </button>
+                </div>
+                
+                <div class="list" >
+                <label class="item item-input" >
+                     <!-- ng-class="{ 'has-error-lr' : buyerForm.sName.$invalid, 'valid-lr' : buyerForm.sName.$valid}"-->
+                       <!-- <span class="input-label">Shop Name</span>-->
+                        <input type="text" placeholder="Shop Name" ng-model="user.shopName" name="sName" minlength="1" maxlength="50"  required>
+                    <i class="col col-10 ion-alert-circled assertive" ng-if="buyerForm.sName.$invalid" ></i>
+                </label>
+                <label class="item item-input"  ng-show="user.category == 1 || user.category == 3" ng-form='userRegForm' name='userRegForm'>
+                   <!--ng-class="{ 'has-error-lr' : userRegForm.tin.$dirty && userRegForm.tin.$invalid, 'valid' : userRegForm.tin.$valid}"-->
+                    <!--<span class="input-label">TIN Number</span>-->
+                    <input type="text" ng-model="user.tinNumber" placeholder="TIN/CST/ST Number" name="tin" ng-pattern="onlyNumbers" minlength="1" maxlength="10" required>
+                    <i class="col col-10 ion-alert-circled assertive" ng-if="userRegForm.tin.$invalid" ></i>
+                </label>
+                <label class="item item-input" >
+                       <!--ng-class="{ 'has-error-lr' : buyerForm.fName.$invalid, 'valid-lr' : buyerForm.fName.$valid}"-->
+                        <!--<span class="input-label">First Name</span>-->
+                        <input type="text" placeholder="First Name" ng-model="user.firstName" name="fName" maxlength="50" required>
+                     <i class="col col-10 ion-alert-circled assertive" ng-if="buyerForm.fName.$invalid" ></i>
+                </label>
+                <label class="item item-input">
+                      <!--ng-class="{ 'has-error-lr' : buyerForm.lName.$invalid, 'valid' : buyerForm.fName.$valid}"-->
+                       <!-- <span class="input-label">Last Name</span>-->
+                        <input type="text" placeholder="Last Name" ng-model="user.lastName" name="lName" maxlength="50" required>
+                   <i class="col col-10 ion-alert-circled assertive" ng-if="buyerForm.lName.$invalid" ></i>  
+                </label>
+                <label class="item item-input">
+                   <!--ng-class="{ 'has-error-lr' : buyerForm.phoneNum.$invalid, 'valid' : buyerForm.phoneNum.$valid}"-->
+                    <!--<span class="input-label">Phone #</span>-->
+                    <input type="tel" name="phoneNum"  ng-model="user.phone" placeholder="Phone Number#"  minlength="10" maxlength="10" required>
+                     <i class="col col-10 ion-alert-circled assertive" ng-if="buyerForm.phoneNum.$invalid" ></i>
+                </label>
+                <label class="item item-input" > 
+                 <!-- ng-class="{ 'has-error-lr' : buyerForm.email.$invalid, 'valid-lr' : buyerForm.email.$valid}"-->
+                   <!-- <span class="input-label">email</span>-->
+                    <input type="Email" placeholder="Email Id" ng-model="user.email"  name="email" required>
+                     <i class="col col-10 ion-alert-circled assertive" ng-if="buyerForm.email.$invalid" ></i>
+                </label>
+                <label  class="item item-radio" ng-show="user.category == 1 || user.category == 3">
+                    <span class="subdued dark"> Gender:</span> 
+                    <!--<ion-radio ng-value="M" ng-model="user.gender" > Male </ion-radio>
+                    <ion-radio ng-value="F" ng-model="user.gender"> Female </ion-radio>-->
+                    <ion-radio ng-value="sex.id" ng-repeat="sex in gender" ng-model="user.gender" ng-checked="sex.selected"> {{sex.value}} </ion-radio>
+                    
+                </label>
+                 <div class="spacer" style="height:60px"></div>
+                    <!--inv {{userRegForm.buyerForm.$invalid}}
+                    form {{userRegForm.buyerForm}}-->
+                 
+                <div align-title="left" class="bar bar-footer bar-clear" ng-show="user.category != null">
+
+                    <div class="buttons" ng-click="">
+                        <button class="button button-stable" type="reset" ng-click="clearUserRegForm()" style=" color: rgba(140, 140, 140, 0.8);">Cancel</button>
+                    </div>
+                    <h6 class="title"></h6>
+                    <div class="buttons"  >
+                        <button class="button button-balanced" ng-show="user.category == 2"  type="submit" ng-disabled="userRegForm.buyerForm.$invalid" ng-click="registerUser(user)">Save</button>
+
+                        <button class="button button-balanced" ng-show="user.category == 3  "  type="submit" ng-disabled="userRegForm.$invalid" ng-click="registerUser(user)">Save</button>
+                    </div>
+
+                </div>
+            </div>
+            <!--<div ng-show="user.category == 1 || user.category == 3" class="list list-inset">-->
+
+                <!--<label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.dob.$dirty && userRegForm.dob.$invalid, 'valid' : userRegForm.dob.$valid}">
+                    <span class="input-label">Date of Birth</span>
+                    <input type="date" ng-model="user.dob" name="dob"  required>
+                </label>-->
+               
+                
+                <!--<label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.st.$invalid, 'valid' : userRegForm.st.$valid}">
+                   
+                    <input type="text" ng-model="user.stNumber" placeholder="Sales Tax Number" name="st" ng-pattern="onlyNumbers" maxlength="10"  required>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.cst.$invalid, 'valid' : userRegForm.cst.$valid}">
+                    
+                    <input type="text" ng-model="user.cstNumber" placeholder="CST Number" name="cst" ng-pattern="onlyNumbers" maxlength="10"  >
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.pan.$invalid, 'valid' : userRegForm.pan.$valid}">
+                   
+                    <input type="text" ng-model="user.panNumber" placeholder="PAN Number" name="pan" maxlength="10" required>
+                </label>-->
+               
+               
+                
+            <!--</div> -->
+            
+            <!--<input type="submit" class="button button-block" value="Save"/>
+            <a href="#/tab/dash" class="button button-block">Cancel</a>-->
+  
+        <!--<div class="bar bar-footer bar-gray"  ng-show="user.category== 'buyer' || user.category== 'seller' || user.category== 'both'">
+          <div class="buttons" ng-click="">
+            <button class="button button-stable">Cancel</button>
+          </div>
+          <h1 class="title"></h1>
+          <div class="buttons" ng-click="registerUser(user)">
+            <button class="button button-balanced">Save</button>
+          </div>
+        </div>--> 
+          
+             <!--form = {{user | json}}-->
+     </ion-content>
+     
+    <!--<ion-footer-bar align-title="left" class="bar bar-footer bar-stable" ng-show="user.category != null">
+       
+         <div class="buttons" ng-click="">
+            <button class="button button-stable" type="reset" ng-click="clearUserRegForm()">Cancel</button>
+          </div>
+          <h6 class="title"></h6>
+          <div class="buttons"  >
+            <button class="button button-balanced" ng-show="user.category == 2"  type="submit" ng-disabled="userRegForm.buyerForm.$invalid" ng-click="registerUser(user)">Save</button>
+          
+            <button class="button button-balanced" ng-show="user.category == 3  "  type="submit" ng-disabled="userRegForm.$invalid" ng-click="registerUser(user)">Save</button>
+          </div>
+         
+    </ion-footer-bar>-->
+    </form>
+</ion-view>
